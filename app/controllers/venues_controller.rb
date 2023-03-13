@@ -17,19 +17,19 @@ class VenuesController < ApplicationController
 
   def create
 
-    input_address = params.fetch("query_address")
-    input_name = params.fetch("query_name")
-    input_neighborhood = params.fetch("query_neighborhood")
+    input_address = params.fetch("input_address")
+    input_name = params.fetch("input_name")
+    input_neighborhood = params.fetch("input_neighborhood")
 
 
-    new_venue = Venue.new
-    new_venue.address = input_address
-    new_venue.name = input_name
-    new_venue.neighborhood = input_neighborhood
+    venue = Venue.new
+    venue.address = input_address
+    venue.name = input_name
+    venue.neighborhood = input_neighborhood
 
-    new_venue.save
+    venue.save
 
-    redirect_to("/venues/#{venue.name}")
+    redirect_to("/venues/#{venue.id}")
   end
   
   def update
@@ -54,7 +54,7 @@ class VenuesController < ApplicationController
 
   def destroy
 
-    the_id = params.fetch("created_at")
+    the_id = params.fetch("venue_id").at(0)
 
     matching_venues = Venue.where({ :id => the_id })
 
